@@ -145,7 +145,7 @@ table {
 a:hover {
   color: #d59649;
 }
-#header {
+#header-inner {
   border-bottom: 4px solid #d59649;
 }
 #header-top {
@@ -182,6 +182,74 @@ a:hover {
 }
 #header-top-list > li {
   margin-left: 20px;
+}
+#nav-drawer {
+  display: none;
+}
+
+.nav-unshown {
+  display: none;
+}
+#nav-open {
+  position: absolute;
+  top: 18px;
+  right: 5px;
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+  vertical-align: middle;
+}
+#nav-open span {
+  height: 3px; /*線の太さ*/
+  width: 25px; /*長さ*/
+  border-radius: 3px;
+  background: #555;
+  display: block;
+  content: "";
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+#nav-open span:before {
+  bottom: -8px;
+}
+#nav-open span:after {
+  bottom: -16px;
+}
+#nav-content {
+  overflow: auto;
+  position: fixed;
+  top: 60px;
+  right: 0;
+  z-index: 9999; /*最前面に*/
+  width: 90%; /*右側に隙間を作る（閉じるカバーを表示）*/
+  max-width: 330px; /*最大幅（調整してください）*/
+  /* height: 100%; */
+  background: #fff; /*背景色*/
+  transition: 0.3s ease-in-out; /*滑らかに表示*/
+  -webkit-transform: translateX(105%);
+  transform: translateX(105%); /*左に隠しておく*/
+}
+#nav-content li {
+  position: relative;
+  text-align: center;
+}
+#nav-content li:nth-child(10) {
+  background-color: #d59649;
+}
+#nav-content li::after {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  content: ">";
+}
+#nav-content a {
+  display: block;
+  line-height: 56px;
+}
+#nav-input:checked ~ #nav-content {
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%); /*中身を表示（右へスライド）*/
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
 }
 #header-main {
   background-color: #1d2d43;
@@ -236,7 +304,7 @@ a:hover {
   margin-bottom: 20px;
 }
 #information li {
-  margin: 15px 0;
+  margin: 15px 0px;
   border-bottom: 1px solid #1d2d43;
 }
 
@@ -257,14 +325,14 @@ a:hover {
 }
 .guide-item a {
   display: block;
-  max-width: 300px;
+  /* max-width: 300px; */
   transition: opacity 0.2s;
 }
 .guide-item a:hover {
   opacity: 0.7;
 }
 .guide-item .img-wrapper {
-  width: 300px;
+  width: 100%;
   height: 310px;
   background-image: url(img/ichigaya.jpg);
   background-position: 20%;
@@ -277,8 +345,9 @@ a:hover {
   background-position: center;
 }
 #campus-guide .guide-item {
-  max-width: 300px;
+  width: 300px;
   height: 370px;
+  margin: 10px 0;
 }
 .guide-item p {
   background-color: #d59649;
@@ -295,6 +364,7 @@ a:hover {
 .sports-item a {
   display: flex;
   transition: opacity 0.2s;
+  background-color: #f1efeb;
 }
 .sports-item a:hover {
   opacity: 0.7;
@@ -308,7 +378,7 @@ a:hover {
 }
 .txt-wrapper {
   padding: 0 40px;
-  background-color: #f1efeb;
+  /* background-color: #f1efeb; */
 }
 .txt-wrapper h2 {
   font-size: 25px;
@@ -320,6 +390,7 @@ a:hover {
 }
 .circle-item {
   display: flex;
+  background-color: #f1efeb;
 }
 
 #circle .img-wrapper {
@@ -334,7 +405,7 @@ a:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 40px;
-  background-color: #f1efeb;
+  /* background-color: #f1efeb; */
 }
 .list-wrapper {
   display: flex;
@@ -366,6 +437,7 @@ a:hover {
 } */
 .item-wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   max-width: 1020px;
   margin: 60px auto;
@@ -375,6 +447,7 @@ a:hover {
   width: 290px;
   height: 60px;
   border: 2px solid #1d2d43;
+  margin: 10px 0;
 }
 .item a {
   display: block;
@@ -440,6 +513,29 @@ a:hover {
   text-decoration: none;
   font-size: 14px;
 }
+#mobile-list {
+  display: none;
+}
+#mobile-list ul {
+  width: calc(100% - 20px);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#mobile-list li {
+  text-align: center;
+  width: 49%;
+  padding: 20px 0;
+  margin-bottom: 7px;
+  background-color: #1d2d43;
+}
+#mobile-list a {
+  color: #ffffff;
+}
+#mobile-list a:hover {
+  color: #d59649;
+}
 #banner {
   text-align: center;
   margin-top: 80px;
@@ -454,4 +550,92 @@ a:hover {
 }
 #copyright {
   text-align: center;
+}
+@media screen and (max-width: 480px) {
+  #header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 100;
+  }
+  #header-title {
+    font-size: 25px;
+    margin-left: 10px;
+  }
+  #header-top-list {
+    display: none;
+  }
+  #header-main {
+    display: none;
+  }
+  #nav-drawer {
+    display: block;
+  }
+  .heading {
+    margin-left: 10px;
+  }
+  #information li {
+    margin: 15px 10px;
+  }
+  #campus-guide .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 0 10px;
+  }
+  #campus-guide .guide-item {
+    width: 100vw;
+  }
+  .sports-item a {
+    display: block;
+    margin: 0 auto;
+    width: calc(100% - 20px);
+    padding: 20px 0;
+    /* text-align: center; */
+  }
+  #sports .img-wrapper {
+    display: block;
+    width: 90%;
+    height: 185px;
+    margin: 0px auto;
+  }
+  #sports .txt-wrapper {
+    display: block;
+    width: 90%;
+    margin: 0px auto;
+    padding: 0;
+  }
+  .circle-item {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    flex-direction: column-reverse;
+    padding: 20px 0;
+  }
+  #circle .img-wrapper {
+    width: 90%;
+    height: 185px;
+    margin: 0 auto;
+  }
+  #circle .txt-wrapper {
+    padding-left: 20px;
+  }
+  .list-wrapper {
+    display: block;
+  }
+  .list-wrapper li {
+    width: 100%;
+  }
+  .list-wrapper li a {
+    display: block;
+    padding-right: 30px;
+  }
+
+  #footer .wrapper {
+    display: none;
+  }
+  #mobile-list {
+    display: block;
+    margin: 70px 0;
+  }
 }
